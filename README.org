@@ -1,0 +1,155 @@
+#+begin_src sh
+$ ./run.sh
+{:mulog/trace-id #mulog/flake "53XZtKMHXkCOVzDBnMVVQvsFfodloaQh", :mulog/timestamp 1749829760128, :mulog/event-name :log/message, :mulog/namespace "xtdb.metrics", :mulog/origin :slf4j-mulog, :log/message "tagging all metrics with node-id: 529b4027", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZtKW747FAqpLH4FYHE8ahV11JuKjX", :mulog/timestamp 1749829760169, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.BaseAllocator", :mulog/origin :slf4j-mulog, :log/message "Debug mode disabled. Enable with the VM option -Darrow.memory.debug.allocator=true.", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZtKWQ5zyryrC_32wQ_4LpVR97ZQbe", :mulog/timestamp 1749829760171, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.DefaultAllocationManagerOption", :mulog/origin :slf4j-mulog, :log/message "allocation manager type not specified, using netty as the default type", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZtKWlBsLl2vhmbB6KyENOiNPi4_33", :mulog/timestamp 1749829760172, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.CheckAllocator", :mulog/origin :slf4j-mulog, :log/message "Using DefaultAllocationManager at memory-netty/18.3.0/arrow-memory-netty-18.3.0.jar!/org/apache/arrow/memory/netty/DefaultAllocationManagerFactory.class", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZtLCcIHHhlc_4ltxeSmR4wn7Vn8lb", :mulog/timestamp 1749829760356, :mulog/event-name :log/message, :mulog/namespace "xtdb.pgwire", :mulog/origin :slf4j-mulog, :log/message "Server started on port: 36385", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZtLDqTKnX7pL5pbdbIUB7Pmrf231g", :mulog/timestamp 1749829760361, :mulog/event-name :log/message, :mulog/namespace "xtdb.garbage_collector.GarbageCollector", :mulog/origin :slf4j-mulog, :log/message "Starting GarbageCollector with approxRunInterval: PT10M, blocksToKeep: 10", :log/level :info}
+{:pairs-with "Beer", :name "Pálpusztai", :xt/id :smelly}
+#+end_src
+
+#+begin_src sh
+$ ./run_bundle.sh
+{:mulog/trace-id #mulog/flake "53XZxkS2ZQtYU3Lis25iGVd4sL6Dp8oV", :mulog/timestamp 1749829836119, :mulog/event-name :log/message, :mulog/namespace "xtdb.metrics", :mulog/origin :slf4j-mulog, :log/message "tagging all metrics with node-id: ce618fc6", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZxkaLZDHwFz0XkXiLyhPlDcX_l7di", :mulog/timestamp 1749829836158, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.BaseAllocator", :mulog/origin :slf4j-mulog, :log/message "Debug mode disabled. Enable with the VM option -Darrow.memory.debug.allocator=true.", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZxkaabWZvWhu934S4AAHA0BtvXf9g", :mulog/timestamp 1749829836159, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.DefaultAllocationManagerOption", :mulog/origin :slf4j-mulog, :log/message "allocation manager type not specified, using netty as the default type", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZxkauCuOU67ZylB605jr-A5LXT0EX", :mulog/timestamp 1749829836160, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.CheckAllocator", :mulog/origin :slf4j-mulog, :log/message "Using DefaultAllocationManager at memory/netty/DefaultAllocationManagerFactory.class", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZxlFIzUwcgE4BwjEj6LRwdRTUl-8f", :mulog/timestamp 1749829836334, :mulog/event-name :log/message, :mulog/namespace "xtdb.pgwire", :mulog/origin :slf4j-mulog, :log/message "Server started on port: 46863", :log/level :info}
+{:mulog/trace-id #mulog/flake "53XZxlGXGvOTf2og5ae89htX7LqCJHQt", :mulog/timestamp 1749829836339, :mulog/event-name :log/message, :mulog/namespace "xtdb.garbage_collector.GarbageCollector", :mulog/origin :slf4j-mulog, :log/message "Starting GarbageCollector with approxRunInterval: PT10M, blocksToKeep: 10", :log/level :info}
+6월 13, 2025 5:50:36 오후 xtdb.util.SystemLoggerKt error
+SEVERE: Ingestion stopped: error processing log record at id 0 (epoch: 0, logOffset: 0)
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at org.apache.arrow.vector.complex.DenseUnionVector.registerNewTypeId(DenseUnionVector.java:249)
+	at org.apache.arrow.vector.complex.DenseUnionVector.initializeChildrenFromFields(DenseUnionVector.java:169)
+	at org.apache.arrow.vector.complex.ListVector.initializeChildrenFromFields(ListVector.java:127)
+	at org.apache.arrow.vector.types.pojo.Field.createVector(Field.java:107)
+	at org.apache.arrow.vector.ipc.ArrowReader.initialize(ArrowReader.java:187)
+	at org.apache.arrow.vector.ipc.ArrowReader.ensureInitialized(ArrowReader.java:171)
+	at org.apache.arrow.vector.ipc.ArrowReader.getVectorSchemaRoot(ArrowReader.java:68)
+	at xtdb.indexer.LogProcessor$processRecords$1.invokeSuspend(LogProcessor.kt:139)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:94)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:70)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:48)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at xtdb.indexer.LogProcessor.processRecords(LogProcessor.kt:117)
+	at xtdb.api.log.InMemoryLog$subscribe$job$1.invokeSuspend$lambda$3(InMemoryLog.kt:86)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptibleInExpectedContext(Interruptible.kt:48)
+	at kotlinx.coroutines.InterruptibleKt.access$runInterruptibleInExpectedContext(Interruptible.kt:1)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invokeSuspend(Interruptible.kt:40)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invoke(Interruptible.kt)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invoke(Interruptible.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndspatched(Undispatched.kt:66)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:43)
+	at kotlinx.coroutines.BuildersKt__Builders_commonKt.withContext(Builders.common.kt:157)
+	at kotlinx.coroutines.BuildersKt.withContext(Unknown Source)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptible(Interruptible.kt:39)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptible$default(Interruptible.kt:36)
+	at xtdb.api.log.InMemoryLog$subscribe$job$1.invokeSuspend(InMemoryLog.kt:86)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+6월 13, 2025 5:50:36 오후 xtdb.util.SystemLoggerKt error
+SEVERE: XTDB transaction processing has encountered an unrecoverable error and has been stopped to prevent corruption of your data.
+This node has also been marked unhealthy, so if it is running within a container orchestration system (e.g. Kubernetes) it should be restarted shortly.
+
+Please see https://docs.xtdb.com/ops/troubleshooting#ingestion-stopped for more information and next steps.
+Execution error (Fault) at xtdb.error/fault (error.clj:90).
+Ingestion stopped: Index 0 out of bounds for length 0
+#+end_src
+
+#+begin_src sh
+$ ./run_compiled_bundle.sh
+{:mulog/trace-id #mulog/flake "53X_0MxZH8B2YYaNi3EsuYjKJu8zkPsY", :mulog/timestamp 1749829898264, :mulog/event-name :log/message, :mulog/namespace "xtdb.metrics", :mulog/origin :slf4j-mulog, :log/message "tagging all metrics with node-id: 2c4853e4", :log/level :info}
+{:mulog/trace-id #mulog/flake "53X_0N6-PkZYij_iCmNqhg0cZThPtlci", :mulog/timestamp 1749829898304, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.BaseAllocator", :mulog/origin :slf4j-mulog, :log/message "Debug mode disabled. Enable with the VM option -Darrow.memory.debug.allocator=true.", :log/level :info}
+{:mulog/trace-id #mulog/flake "53X_0N6Fn6UWVhE_U5nMv_U7PesjYAli", :mulog/timestamp 1749829898305, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.DefaultAllocationManagerOption", :mulog/origin :slf4j-mulog, :log/message "allocation manager type not specified, using netty as the default type", :log/level :info}
+{:mulog/trace-id #mulog/flake "53X_0N6_ZydFUItjVtSTlTbSSX1_3f6K", :mulog/timestamp 1749829898306, :mulog/event-name :log/message, :mulog/namespace "org.apache.arrow.memory.CheckAllocator", :mulog/origin :slf4j-mulog, :log/message "Using DefaultAllocationManager at memory/netty/DefaultAllocationManagerFactory.class", :log/level :info}
+{:mulog/trace-id #mulog/flake "53X_0NkYMZ9vGEgFUWLH2xXqNQO-HQLf", :mulog/timestamp 1749829898478, :mulog/event-name :log/message, :mulog/namespace "xtdb.pgwire", :mulog/origin :slf4j-mulog, :log/message "Server started on port: 45137", :log/level :info}
+{:mulog/trace-id #mulog/flake "53X_0NlRWqjzL6qM88djldQMdRo5Zzc-", :mulog/timestamp 1749829898482, :mulog/event-name :log/message, :mulog/namespace "xtdb.garbage_collector.GarbageCollector", :mulog/origin :slf4j-mulog, :log/message "Starting GarbageCollector with approxRunInterval: PT10M, blocksToKeep: 10", :log/level :info}
+6월 13, 2025 5:51:38 오후 xtdb.util.SystemLoggerKt error
+SEVERE: Ingestion stopped: error processing log record at id 0 (epoch: 0, logOffset: 0)
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at org.apache.arrow.vector.complex.DenseUnionVector.registerNewTypeId(DenseUnionVector.java:249)
+	at org.apache.arrow.vector.complex.DenseUnionVector.initializeChildrenFromFields(DenseUnionVector.java:169)
+	at org.apache.arrow.vector.complex.ListVector.initializeChildrenFromFields(ListVector.java:127)
+	at org.apache.arrow.vector.types.pojo.Field.createVector(Field.java:107)
+	at org.apache.arrow.vector.ipc.ArrowReader.initialize(ArrowReader.java:187)
+	at org.apache.arrow.vector.ipc.ArrowReader.ensureInitialized(ArrowReader.java:171)
+	at org.apache.arrow.vector.ipc.ArrowReader.getVectorSchemaRoot(ArrowReader.java:68)
+	at xtdb.indexer.LogProcessor$processRecords$1.invokeSuspend(LogProcessor.kt:139)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:94)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:70)
+	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:48)
+	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source)
+	at xtdb.indexer.LogProcessor.processRecords(LogProcessor.kt:117)
+	at xtdb.api.log.InMemoryLog$subscribe$job$1.invokeSuspend$lambda$3(InMemoryLog.kt:86)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptibleInExpectedContext(Interruptible.kt:48)
+	at kotlinx.coroutines.InterruptibleKt.access$runInterruptibleInExpectedContext(Interruptible.kt:1)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invokeSuspend(Interruptible.kt:40)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invoke(Interruptible.kt)
+	at kotlinx.coroutines.InterruptibleKt$runInterruptible$2.invoke(Interruptible.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndspatched(Undispatched.kt:66)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:43)
+	at kotlinx.coroutines.BuildersKt__Builders_commonKt.withContext(Builders.common.kt:157)
+	at kotlinx.coroutines.BuildersKt.withContext(Unknown Source)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptible(Interruptible.kt:39)
+	at kotlinx.coroutines.InterruptibleKt.runInterruptible$default(Interruptible.kt:36)
+	at xtdb.api.log.InMemoryLog$subscribe$job$1.invokeSuspend(InMemoryLog.kt:86)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:829)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+6월 13, 2025 5:51:38 오후 xtdb.util.SystemLoggerKt error
+SEVERE: XTDB transaction processing has encountered an unrecoverable error and has been stopped to prevent corruption of your data.
+This node has also been marked unhealthy, so if it is running within a container orchestration system (e.g. Kubernetes) it should be restarted shortly.
+
+Please see https://docs.xtdb.com/ops/troubleshooting#ingestion-stopped for more information and next steps.
+Exception in thread "main" xtdb.error.Fault: Ingestion stopped: Index 0 out of bounds for length 0
+	at xtdb.error$fault.invokeStatic(error.clj:90)
+	at xtdb.error$fault.invoke(error.clj:82)
+	at xtdb.error$read_error.invokeStatic(error.clj:133)
+	at xtdb.error$read_error.invoke(error.clj:132)
+	at cognitect.transit$read_handler$reify__713.fromRep(transit.clj:181)
+	at com.cognitect.transit.impl.JsonParser.parseArray(JsonParser.java:143)
+	at com.cognitect.transit.impl.JsonParser.parseVal(JsonParser.java:56)
+	at com.cognitect.transit.impl.JsonParser.parse(JsonParser.java:46)
+	at com.cognitect.transit.impl.ReaderFactory$ReaderImpl.read(ReaderFactory.java:112)
+	at cognitect.transit$read.invokeStatic(transit.clj:323)
+	at cognitect.transit$read.invoke(transit.clj:319)
+	at xtdb.serde$read_transit.invokeStatic(serde.clj:284)
+	at xtdb.serde$read_transit.invoke(serde.clj:278)
+	at xtdb.serde$fn__4198$fn__4200.invoke(serde.clj:318)
+	at xtdb.serde$fn__4198.invokeStatic(serde.clj:317)
+	at xtdb.serde$fn__4198.invoke(serde.clj:311)
+	at xtdb.error$fn__786$G__781__793.invoke(error.clj:14)
+	at xtdb.api$submit_tx_STAR_.invokeStatic(api.clj:231)
+	at xtdb.api$submit_tx_STAR_.invoke(api.clj:229)
+	at xtdb.api$execute_tx$fn__4519.invoke(api.clj:329)
+	at xtdb.api$with_conn_STAR_.invokeStatic(api.clj:45)
+	at xtdb.api$with_conn_STAR_.invoke(api.clj:40)
+	at xtdb.api$execute_tx.invokeStatic(api.clj:328)
+	at xtdb.api$execute_tx.invoke(api.clj:295)
+	at xtdb.api$execute_tx.invokeStatic(api.clj:325)
+	at xtdb.api$execute_tx.invoke(api.clj:295)
+	at xtdb_bundle_test.core$_main.invokeStatic(core.clj:10)
+	at xtdb_bundle_test.core$_main.doInvoke(core.clj:7)
+	at clojure.lang.RestFn.invoke(RestFn.java:400)
+	at clojure.lang.AFn.applyToHelper(AFn.java:152)
+	at clojure.lang.RestFn.applyTo(RestFn.java:135)
+	at xtdb_bundle_test.core.main(Unknown Source)
+#+end_src
